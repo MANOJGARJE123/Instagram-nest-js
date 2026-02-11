@@ -1,5 +1,6 @@
-import { Controller, Get, NotFoundException, Param }from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param, Post, Body }from '@nestjs/common';
 import { UserService } from './user.service';
+import { UserDto } from './user.dto';
 
 @Controller('users')
 export class UserController {
@@ -19,4 +20,10 @@ export class UserController {
                 throw new NotFoundException(error.message);
             }       
         }
+
+        @Post()
+        addUser(@Body() user:UserDto){
+            return this.userService.addUser(user);
+        }
+        
 }
